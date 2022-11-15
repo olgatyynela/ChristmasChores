@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+	<title>Christmas Chores</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>	
+
+<body>
+	
+	<h1 th:text="'Lisää askare'"></h1>
+	
+	<form action="#" th:action="@{/addchore}" th:object="${chore}" method="post">
+    	<p>Askare: <input type="text" th:field="*{askare}" /></p>
+    	
+       
+         	<label for="tekijavalikko">Tekijä: </label>
+			 <select id="tekijavalikko" th:field="*{tekija}" class="form-control">
+       			<option th:each="tekija: ${tekijat}" th:value="${tekija.tekijaId}" th:text="${tekija.nimi}"></option>
+    		</select>
+        <p><input type="submit" value="Submit"/></p>
+
+	</form>
+	
+</body>
+</html>

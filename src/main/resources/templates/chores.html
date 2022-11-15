@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>Christmas Chores</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>	
+
+<body>
+	
+	<div style = "display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
+		<h1 th:text="'Christmas Chores'" style = "margin-left: 10px"></h1>
+	</div>
+	
+	<table class="table table-striped"> <!-- miten teen väleistä pienemmät? -->
+	
+		<tbody>
+		
+			<tr>
+				<th>Askare</th>
+				<th>Tekijä</th>
+				<th>Merkkaa tehdyksi</th>
+				<th>Poista</th>
+				<th></th>
+				<th></th>
+			</tr>
+			<tr th:each = "chore : ${chores}"> 
+				<td th:if = "${chore.isDone}" style = "text-decoration: line-through;" th:text = "${chore.askare}"></td>
+				<td th:unless = "${chore.isDone}" th:text = "${chore.askare}"></td>
+				<td th:text = "${chore.tekija.nimi}"></td>	
+				<td>
+					<form action="#" th:action="@{/markdonepage/} + ${chore.id}" method="post">
+	       		 	<p><input type="submit" value="✓" class="btn btn-success" style = "margin-left: 40px"/></p>
+	
+					</form>
+				</td>
+
+				<td><a class="btn btn-danger"  th:href="'/deletechore/' + ${chore.id}" style = "margin-left: 5px">×</a></td> 
+				
+				
+	
+			</tr>
+		
+		
+		</tbody>
+	
+	</table>
+	
+	<a class="btn btn-primary" th:href="@{addchorepage}" style = "margin-left: 10px">Lisää askare</a>
+
+</body>
+</html>
